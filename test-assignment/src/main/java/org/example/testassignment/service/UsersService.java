@@ -2,14 +2,21 @@ package org.example.testassignment.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.testassignment.common.BoardDto;
 import org.example.testassignment.common.UsersDto;
+import org.example.testassignment.domain.Board;
 import org.example.testassignment.domain.Users;
+import org.example.testassignment.repository.BoardRepository;
 import org.example.testassignment.repository.UsersRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +29,7 @@ public class UsersService {
   public ResponseEntity<String> createUsers(UsersDto dto) {
     Users users = new Users(dto.getUserName(), dto.getEmail(), dto.getPhone());
 
-    if (dto.getEmail().contains("@")) {
+    if (!dto.getEmail().contains("@")) {
       return new ResponseEntity<>("이메일 형식을 확인하세요.", HttpStatus.BAD_REQUEST);
     }
     usersRepository.save(users);
@@ -55,5 +62,14 @@ public class UsersService {
   public ResponseEntity<String> deleteUsers(Long id) {
     usersRepository.deleteById(id);
     return new ResponseEntity<>("삭제", HttpStatus.OK);
+  }
+
+  // 유저의 게시글 리스트 조회
+  public List<Board> getUsersBoardList(Long id, Pageable pageable) {
+    Optional<Users> users = Optional.ofNullable(usersRepository.findById(id).orElseThrow(
+        () -> new IllegalArgumentException("알 수 없는 사용자입니다.")
+    ));
+
+    return users.get().getBoardList();
   }
 }

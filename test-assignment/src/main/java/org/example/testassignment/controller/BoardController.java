@@ -17,13 +17,13 @@ public class BoardController {
   private final BoardService boardService;
 
   // 생성
-  @PostMapping
+  @PostMapping("/create")
   private ResponseEntity<String> createPost(@RequestBody BoardDto dto) {
     return boardService.addPost(dto);
   }
 
   // 조회
-  @GetMapping
+  @GetMapping("/read")
   private ResponseEntity<Page<BoardDto>> getPosts(Pageable pageable) {
     return new ResponseEntity<>(boardService.viewAllPosts(pageable), HttpStatus.OK);
   }

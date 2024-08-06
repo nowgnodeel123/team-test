@@ -2,10 +2,13 @@ package org.example.testassignment.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.catalina.User;
 import org.example.testassignment.common.BoardDto;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,6 +30,11 @@ public class Board {
 
   @Column(nullable = false)
   private String author;
+
+  @ToString.Exclude
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+  private Users users;
 
   public Board(String title, String content, String author) {
     this.title = title;

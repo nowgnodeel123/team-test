@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BoardService {
 
-  BoardRepository boardRepository;
+  private final BoardRepository boardRepository;
 
   // 생성
   @Transactional

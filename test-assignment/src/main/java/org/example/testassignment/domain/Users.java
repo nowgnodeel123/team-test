@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.testassignment.global.BaseTimeEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -21,6 +24,10 @@ public class Users extends BaseTimeEntity {
   private String email;
 
   private String phone;
+
+  @ToString.Exclude
+  @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+  private List<Board> boardList = new ArrayList<>();
 
   public Users(String userName, String email, String phone) {
     this.userName = userName;
