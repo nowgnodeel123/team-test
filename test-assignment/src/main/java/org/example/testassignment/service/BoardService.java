@@ -5,11 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.testassignment.common.BoardDto;
 import org.example.testassignment.domain.Board;
 import org.example.testassignment.repository.BoardRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -20,16 +20,18 @@ public class BoardService {
   // 생성
   @Transactional
   public ResponseEntity<String> addPost(BoardDto dto) {
-    Board board = new Board(dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getCreateTime());
+    Board board = new Board(dto.getTitle(), dto.getContent(), dto.getAuthor());
     boardRepository.save(board);
     return new ResponseEntity<>("추가", HttpStatus.OK);
   }
 
-  // 조회
+  //조회
   @Transactional
-  public ResponseEntity<List<Board>> viewAllPosts() {
-    return new ResponseEntity<>(boardRepository.findAll(), HttpStatus.OK);
+  public Page<BoardDto> viewAllPosts(Pageable pageable) {
+    Page<Board> boardList = boardRepository.findAll(pageable);
+    return boardList.map(BoardDto::new);
   }
+
 
   // 수정
   @Transactional

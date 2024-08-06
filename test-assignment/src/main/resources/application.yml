@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: test-assignment
+
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:./test;MODE=MYSQL;
+    username: sa
+    password: 1234
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create

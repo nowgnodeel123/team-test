@@ -2,6 +2,7 @@ package org.example.testassignment.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.testassignment.common.BoardDto;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -27,13 +28,9 @@ public class Board {
   @Column(nullable = false)
   private String author;
 
-  @CreatedDate
-  private LocalDateTime createTime;
-
-  public Board(String title, String content, String author, LocalDateTime createTime) {
+  public Board(String title, String content, String author) {
     this.title = title;
     this.content = content;
     this.author = author;
-    this.createTime = LocalDateTime.now();
   }
 }

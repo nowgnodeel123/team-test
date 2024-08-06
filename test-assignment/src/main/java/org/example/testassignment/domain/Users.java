@@ -2,6 +2,7 @@ package org.example.testassignment.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.testassignment.global.BaseTimeEntity;
 
 @Getter
 @Setter
@@ -9,7 +10,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class Users extends BaseTimeEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
