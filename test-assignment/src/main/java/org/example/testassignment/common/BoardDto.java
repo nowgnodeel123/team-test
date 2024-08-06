@@ -1,14 +1,15 @@
 package org.example.testassignment.common;
 
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 import org.example.testassignment.domain.Board;
 
 import java.io.Serializable;
 
-@Value
-//@Builder
-public class BoardDto implements Serializable {
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class BoardDto{
   String title;
   String content;
   String author;
