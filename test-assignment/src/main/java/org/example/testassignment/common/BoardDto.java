@@ -3,13 +3,11 @@ package org.example.testassignment.common;
 import lombok.*;
 import org.example.testassignment.domain.Board;
 
-import java.io.Serializable;
-
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardDto{
+public class BoardDto {
   String title;
   String content;
   String author;

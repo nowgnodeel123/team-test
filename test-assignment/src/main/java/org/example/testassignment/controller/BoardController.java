@@ -29,13 +29,13 @@ public class BoardController {
   }
 
   // 수정
-  @PutMapping("/{id}")
+  @PutMapping("/update/{id}")
   private ResponseEntity<String> updatePost(@PathVariable Long id, @RequestBody BoardDto dto) {
     return boardService.modifyPost(id, dto);
   }
 
   // 삭제
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/delete/{id}")
   private ResponseEntity<String> deletePost(@PathVariable Long id) {
     return boardService.deletePost(id);
   }
